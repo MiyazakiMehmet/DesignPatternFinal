@@ -15,3 +15,5 @@ mvn clean package
 ```bash
 java -jar target/library-management-1.0-SNAPSHOT.jar
 ```
+
+Group Members: Duygu Aktaş, Mehmet Koray Ergut
