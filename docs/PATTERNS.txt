@@ -1,0 +1,21 @@
+**Design Patterns Used in Our Library Management System**
+
+In this library management system project, we implemented three very important design patterns. These are Factory, Command, and Strategy patterns. We did this for making the code more professional, modular, and easy to maintain for the future. Below, we explain our implementation details.
+
+**1. Factory Pattern (For Book Creation)**
+First of all, we used the Factory Pattern for creating books. Before this, we were writing `new Book()` everywhere in the different parts of the code. This was very bad for clean code principles. So, we created a `BookFactory` class. Now, when the system needs a book, we just send the title, author, ISBN, and tags to the `createBook()` method, and it creates the object for us. 
+
+We chose this pattern because we wanted to put the object creation logic in one single place. If we need to add a new validation rule for book creation later, we will not search the whole project. We just change this one method. In addition to this, it helps the `LibraryApp` class to be more clean so it only focuses on the business logic.
+
+**2. Command Pattern (For Undo Feature)**
+Secondly, we implemented the Command Pattern. This was necessary to successfully complete the "undo book modifications" requirement of the project. Basically, when a user changes a book's information, we turn this action into a `ModifyBookCommand` object. 
+
+The process works like this: When the edit happens, this command object takes a snapshot of the book's old data. After the change is applied, we put this command inside the history stack of the `CommandProcessor`. If the user wants to undo, the system calls the `undo()` method from the stack, and the book goes back to the saved state safely. We selected this pattern because writing reverse-logic for every edit type would make spaghetti code. By turning actions into objects, we achieved a very scalable architecture.
+
+**3. Strategy Pattern (For Search and Sort)**
+Finally, we used the Strategy Pattern for the searching and sorting functions. In our project, users can search by title, author, ISBN, category, or tag. If we write massive `if/else` or `switch` blocks for all of these options, the code will be very long and complicated. Therefore, we solved this with the Strategy Pattern.
+
+We created `SearchStrategy` and `SortStrategy` interfaces. Then, we made separate classes for each search type (for example, `TitleSearchStrategy` and `AuthorSearchStrategy`). When the user makes a choice from the UI, the system triggers the correct strategy at runtime. The `LibraryService` does not need to know how the algorithm works inside. Because of this pattern, our code is very flexible. If we want to add a new search filter in the future, we don't need to touch the old code; we just create one new class.
+
+---
+In conclusion, we worked very hard to use these design patterns correctly. We used the **Factory** pattern to centralize object creation, the **Command** pattern to safely record and undo edits, and the **Strategy** pattern to manage dynamic algorithms without making the code messy. We believe this makes our system a very good example of Object-Oriented Programming principles.
